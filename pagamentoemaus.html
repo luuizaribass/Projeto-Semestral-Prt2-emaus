@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>pagamento emaus</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="mediascreen.css">
+    <link class="icon" rel="icon" href="img/icone.png">
+    <style>
+        body{
+            height: auto;
+        }
+        section {
+            max-width: 970px;
+            margin: 20px 240px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #comprovantePix input[type="file"] {
+            display: none;
+        }
+
+        header{
+            margin-top: -20px;
+        }
+
+        button {
+            color: #BF8B86;
+            background-color: #F1E3E1;
+            border-radius: 50px;
+            padding: 10px 20px;
+            font-weight: bolder;
+        }
+
+        button:hover {
+            background-color: #333;
+            color: #fff;
+        }
+
+        #carrinho-resumo .item-resumo {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #ddd;
+            padding: 10px;
+        }
+
+        #carrinho-resumo img {
+            max-width: 25%;
+            height: auto;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        /* Seção de Dados do Usuário */
+        #dados-usuario {
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+
+
+
+        #endereco label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        #endereco input {
+            width: 98%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        /* Seção de Opções de Pagamento */
+        #pagamento {
+            padding: 20px;
+        }
+
+        #pagamento div {
+            margin-bottom: 15px;
+        }
+
+        /* Mensagens de Sucesso e Erro */
+        #mensagemSucesso,
+        #mensagemErro {
+            padding: 20px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        #mensagemSucesso {
+            background-color: #4caf50;
+            color: #fff;
+        }
+
+        #mensagemErro {
+            background-color: #f44336;
+            color: #fff;
+        }
+
+        #carrinho-resumo .itens-lista {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        #resumo-compra h2{
+            margin-top: 40px;
+        }
+
+
+        #resumo-compra img {
+            max-width: 25%;
+            height: auto;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        #resumo-compra div {
+            margin-bottom: 10px;
+        }
+
+        #resumo-compra p {
+            margin: 5px 0;
+        }
+
+        #resumo-compra button {
+            padding: 10px 20px;
+            background-color: #BF8B86;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #resumo-compra button:hover {
+            background-color: #333;
+        }
+
+        #cartaoSection {
+            display: none;
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        #cartaoSection h3 {
+            color: #333;
+            font-size: 1.5em;
+        }
+
+        .InputContainer {
+            margin-bottom: 20px;
+        }
+
+        .inputCartao {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .visaCard {
+            display: flex;
+            align-items: center;
+        }
+
+        #cartaoSection label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        #cartaoSection input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        #cartaoSection input[type="submit"] {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #cartaoSection input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        #pixSection {
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        #pixSection h3 {
+            color: #333;
+            font-size: 1.5em;
+        }
+
+        #pixSection p {
+            color: #555;
+        }
+
+        #qrCodePix {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        #pix-link-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #pix-link {
+            font-size: 10px;
+            flex-grow: 1;
+            margin-right: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+
+<body onresize="mudouTamanho()" onload="inicializarPagina()">
+    <header>
+        <div id="menu-geral">
+            <a id="" href="index.html"><img id="logo-img" src="img/logo-img.png" alt="logo-emaus"></a>
+            <span id="burguer" class="material-icons" onclick="clickMenu()">menu</span>
+            <menu id="itensMenu">
+                <ul>
+                    <li><a id="espaço" href="camisetasemaus.html">camisetas</a></li>
+                    <li><a id="espaço" href="moletonsemaus.html">moletons</a></li>
+                    <li><a id="espaço" href="unissexemaus.html">unissex</a></li>
+                    <li><a id="espaço" href="acessoriosemaus.html">acessórios</a></li>
+                    <li><a id="espaço" href="pontosemaus.html">pontos</a></li>
+                    <li><a id="iconespaço" class="imgmenu" href="tel:(11) 3425-7299"><i
+                                class="fa-solid fa-phone"></i></a></li>
+                    <li><a id="iconespaço" class="imgmenu" href="loginemaus.html"><i class="fa-solid fa-user"></i></a>
+                    </li>
+                    <li><a id="iconespaço" class="imgmenu" href="jogoemaus.html"><i class="fa-solid fa-gamepad"></i></a>
+                    </li>
+                    <li id="carrinhoGeral">
+                        <a id="iconespaço" class="imgmenu" href="carrinhoemaus.html">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                            <div id="contagem" class="contagem">0</div>
+                        </a>
+                    </li>
+
+                    <li id="iconespaço"><i id="mode_icon" class="fa-solid fa-moon"></i></li>
+                    <li>
+                        <div class="container">
+                            <input type="text" name="text" id="pesquise" class="input" required=""
+                                placeholder="Pesquise aqui..." oninput="filtrarProdutos()">
+                            <div class="icon">
+                                <i class="fa-solid fa-magnifying-glass">
+                                    <title>Search</title>
+                                    <path d="M221.09 64a157.09 157.09 0 10157.09 157.09A157.1 157.1 0 00221.09 64z"
+                                        fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32">
+                                    </path>
+                                    <path fill="none" stroke="currentColor" stroke-linecap="round"
+                                        stroke-miterlimit="10" stroke-width="32" d="M338.29 338.29L448 448"></path>
+                                </i>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </menu>
+        </div>
+    </header>
+
+    <section id="resumo-compra" class="selection">
+        <h2>Resumo da Compra</h2>
+        <div id="carrinho-resumo" class="itens-lista">
+            <!-- Aqui você pode exibir os itens do carrinho com preços, quantidades, etc. -->
+        </div>
+    </section>
+
+    <!-- Seção de Endereço de Entrega -->
+    <section id="endereco">
+        <h2>Endereço de Entrega</h2>
+        <label for="rua">Rua:</label>
+        <input type="text" id="rua" name="rua" placeholder="Nome da Rua">
+
+        <label for="bairro">Bairro:</label>
+        <input type="text" id="bairro" name="bairro" placeholder="Nome do Bairro">
+
+        <label for="cidade">Cidade:</label>
+        <input type="text" id="cidade" name="cidade" placeholder="Nome da Cidade">
+
+        <label for="estado">Estado:</label>
+        <input type="text" id="estado" name="estado" placeholder="Estado">
+
+        <label for="pais">País:</label>
+        <input type="text" id="pais" name="pais" placeholder="País">
+
+        <label for="numero">Número:</label>
+        <input type="text" id="numero" name="numero" placeholder="Número">
+
+        <label for="complemento">Complemento:</label>
+        <input type="text" id="complemento" name="complemento" placeholder="Complemento">
+    </section>
+
+
+    <section id="pagamento">
+        <h2>Opções de Pagamento</h2>
+
+        <!-- Escolha entre PIX ou Cartão -->
+        <div>
+            <input type="radio" id="opcaoPix" name="opcaoPagamento" value="pix" checked>
+            <label for="opcaoPix">PIX</label>
+
+            <input type="radio" id="opcaoCartao" name="opcaoPagamento" value="cartao">
+            <label for="opcaoCartao">Cartão de Crédito ou Débitoix</label>
+        </div>
+
+        <!-- Seção específica para PIX -->
+        <div id="pixSection">
+            <h3>Pagamento com PIX</h3>
+            <p>Para realizar o pagamento com PIX, escaneie o QR code abaixo:</p>
+            <!-- Adicione a imagem do QR code abaixo -->
+            <img src="img/pix.jpeg" alt="QR Code PIX" id="qrCodePix">
+            <div id="pix-link-container">
+                <p id="pix-link">https://seu-banco.com/pix?id=123456789</p>
+                <button onclick="copiarLinkPix()">Copiar Link PIX</button>
+            </div>
+
+            <!-- Adicione a caixa para o comprovante do PIX -->
+            <div id="comprovantePix">
+                <label for="uploadComprovante">Clique agora aqui e deixe o seu comprovante</label>
+                <input type="file" id="uploadComprovante" accept="image/*" onchange="exibirComprovante()">
+                <!-- Adicione uma tag de imagem para exibir a imagem do comprovante -->
+                <img id="previewComprovante" style="max-width: 100%; height: auto; margin-top: 10px; display: none;"
+                    alt="Comprovante">
+            </div>
+        </div>
+
+        <!-- Seção específica para Cartão de Crédito -->
+        <div id="cartaoSection" style="display: none;">
+            <h3>Pagamento com Cartão </h3>
+            <div class="InputContainer">
+                <input placeholder="0000 0000 0000 0000" id="input" class="inputCartao" name="text" type="text">
+                <div class="visaCard">
+                    <svg viewBox="0 0 48 48" height="23" width="23" y="0px" x="0px" xmlns="http://www.w3.org/2000/svg"
+                        class="logo">
+                        <path d="M32 10A14 14 0 1 0 32 38A14 14 0 1 0 32 10Z" fill="#ff9800"></path>
+                        <path d="M16 10A14 14 0 1 0 16 38A14 14 0 1 0 16 10Z" fill="#d50000"></path>
+                        <path
+                            d="M18,24c0,4.755,2.376,8.95,6,11.48c3.624-2.53,6-6.725,6-11.48s-2.376-8.95-6-11.48 C20.376,15.05,18,19.245,18,24z"
+                            fill="#ff3d00"></path>
+                    </svg>
+                </div>
+            </div>
+            <label for="cvc">CVC:</label>
+            <input type="text" id="cvc" name="cvc" placeholder="CVC">
+
+            <label for="validade">Data de Validade:</label>
+            <input type="text" id="validade" name="validade" placeholder="MM/AAAA">
+        </div>
+
+
+    </section>
+
+    <section id="pedido">
+        <button id="finalizarPedido" onclick="verificarCampos()">Finalizar Pedido</button>
+
+        <div id="mensagemSucesso" style="display: none;">
+            <p>Seu pedido foi enviado!</p>
+        </div>
+
+        <div id="mensagemErro" style="display: none;">
+            <p>Preencha todos os campos para finalizar o seu pedido.</p>
+        </div>
+    </section>
+
+
+
+
+
+
+    <footer>
+        <div id="footer-cor">
+            <div id="footer-corpo">
+                <div id="footer-redes">
+                    <img src="img/logo-white.png" alt="">
+                    <p>acesse nossas redes</p>
+
+                    <div id="footer-midias">
+
+                        <a href="https://api.whatsapp.com/send?phone=5511930234169" class="footer-link" id="icone">
+                            <i class="fa-brands fa-square-whatsapp"></i></a>
+
+                        <a href="https://www.instagram.com/coletivo_emaus/" class="footer-link" id="icone">
+                            <i class="fa-brands fa-square-instagram"></i></a>
+
+                        <a href="https://www.facebook.com/coletivoemaus/?locale=pt_BR" class="footer-link" id="icone">
+                            <i class="fa-brands fa-square-facebook"></i></a>
+
+                        <a href="https://twitter.com/coletivoemaus" class="footer-link" id="icone">
+                            <i class="fa-brands fa-square-twitter"></i></a>
+
+                        <a href="https://coletivoemaus.tumblr.com/" class="footer-link" id="icone">
+                            <i class="fa-brands fa-square-tumblr"></i></a>
+
+                    </div>
+                </div>
+
+                <ul class="footer-lista">
+                    <li>
+                        <h3>CATEGORIAS</h3>
+                    </li>
+                    <li>
+                        <a href="acessoriosemaus.html" class="footer-link">Acessórios</a>
+                    </li>
+                    <li>
+                        <a href="camisetasemaus.html" class="footer-link">Camisetas</a>
+                    </li>
+                    <li>
+                        <a href="moletonsemaus.html" class="footer-link">Moletons</a>
+                    </li>
+                    <li>
+                        <a href="pontosemaus.html" class="footer-link">Pontos</a>
+                    </li>
+                    <li>
+                        <a href="unisexemaus.html" class="footer-link">Unissex</a>
+                    </li>
+                </ul>
+
+
+                <ul class="footer-lista">
+                    <li>
+                        <h3>CONTEÚDO</h3>
+                    </li>
+                    <li>
+                        <a href="lojaemaus.html" class="footer-link">Loja Física</a>
+                    </li>
+                    <li>
+                        <a href="faleconoscoemaus.html" class="footer-link">Fale conosco</a>
+                    </li>
+                    <li>
+                        <a href="sobrenosemaus.html" class="footer-link">Sobre nós</a>
+                    </li>
+                    <li>
+                        <a href="politicasemaus.html" class="footer-link">Políticas de privacidade</a>
+                    </li>
+                    <li>
+                        <a href="trocaemaus.html" class="footer-link">Troca e devoluções</a>
+                    </li>
+                </ul>
+
+                <div id="footer-contatos">
+                    <h3>CONTATOS</h3>
+
+                    <div id="coluna-tres">
+                        <div class="contato">
+                            <a href="tel:(11) 3425-7299" class="footer-link" id="telefone icone">
+                                <i class="fa-solid fa-phone-volume"></i></a>
+                            <h4 class="rede-nome">11.99734.0303</h4>
+                        </div>
+
+                        <div class="contato">
+                            <a href="contato@coletivoemaus.com" class="footer-link" id="email icone">
+                                <i class="fa-solid fa-envelope"></i></a>
+                            <h4 class="rede-nome">@coletivoemaus.com</h4>
+                        </div>
+
+                        <div class="contato">
+                            <a href="https://goo.gl/maps/q5jhUDYv6CsGCAB37?coh=178572&entry=tt" class="footer-link"
+                                id="mapa icone">
+                                <i class="fa-solid fa-location-dot"></i></a>
+                            <h4 class="rede-nome">Av. Brasil, 326 - Vila Correa</h4>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div id="footer-final">
+                <p>&#169
+                    2023 all rights reserve</p>
+            </div>
+
+    </footer>
+
+
+    <!-- // ==igual
+    // =recebe -->
+    <script>
+
+         // começo modo noturno
+
+         const mode = document.getElementById('mode_icon');
+        const body = document.body;
+        const itens = document.getElementById('itens-geral');
+        const conteudo = document.getElementById('itens-geral');
+        const caixa = document.getElementsByClassName('item-caixa-inicio');
+        const logoImg = document.getElementById('logo-img');
+        const logoImgPontos = document.getElementById('logo-img-pontos');
+        const nenhum = document.getElementById('nenhumItemEncontrado');
+        const ul = document.ul;
+        const html = document.html
+        const arte = document.getElementById('conteudoArte');
+        const pontos = document.getElementById('pontos-conteudo');
+        const borda = document.getElementById('pontosFinaiss')
+        const pesquisa = document.getElementsByClassName('.input');
+        const lupa = document.getElementsByClassName('.fa-magnifying-glass');
+
+        mode.addEventListener('click', () => {
+            if (mode.classList.contains('fa-moon')) {
+                mode.classList.remove('fa-moon');
+                mode.classList.add('fa-sun');
+                body.classList.add('modo-noturno');
+                logoImg.src = 'img/logo-white.png';
+                logoImgPontos.src = 'img/logo-white.png';
+                itens.classList.add('modo-noturno');
+                conteudo.classList.add('modo-noturno');
+                nenhum.classList.add('modo-noturno');
+                caixa.classList.add('modo-noturno');
+                ul.classList.add('modo-noturno');
+                html.classList.add('modo-noturno');
+                arte.classList.add('modo-noturno');
+                pontos.classList.add('modo-noturno');
+                borda.classList.add('modo-noturno');
+                pesquisa.classList.add('modo-noturno');
+                lupa.classList.add('modo-noturno');
+            } else {
+                mode.classList.add('fa-moon');
+                mode.classList.remove('fa-sun');
+                body.classList.remove('modo-noturno');
+                logoImg.src = 'img/logo-img.png';
+                logoImgPontos.src = 'img/logo-img.png';
+                itens.classList.remove('modo-noturno');
+                conteudo.classList.remove('modo-noturno');
+                nenhum.classList.remove('modo-noturno');
+                caixa.classList.remove('modo-noturno');
+                ul.classList.remove('modo-noturno');
+                html.classList.remove('modo-noturno');
+                arte.classList.remove('modo-noturno');
+                pontos.classList.remove('modo-noturno');
+                borda.classList.remove('modo-noturno');
+                pesquisa.classList.remove('modo-noturno');
+                lupa.classList.remove('modo-noturno');
+            }
+        });
+
+
+         // começo menu responsivo
+
+
+         function mudouTamanho() {
+            if (window.innerWidth >= 768) {
+                itensMenu.style.display = 'block'
+            } else {
+                itensMenu.style.display = 'none'
+            }
+        }
+
+        function clickMenu() {
+            if (itensMenu.style.display == 'block') {
+                itensMenu.style.display = 'none'
+            } else {
+                itensMenu.style.display = 'block'
+            }
+        }
+
+        //fim menu responsivo
+
+        function exibirComprovante() {
+            var inputComprovante = document.getElementById("uploadComprovante");
+            var previewComprovante = document.getElementById("previewComprovante");
+
+            if (inputComprovante.files && inputComprovante.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    previewComprovante.src = e.target.result;
+                    previewComprovante.style.display = "block";
+                };
+
+                reader.readAsDataURL(inputComprovante.files[0]);
+            }
+        }
+
+        function obterNomeUsuarioLogado() {
+            return localStorage.getItem('nomeUsuario') || 'Nome do Usuário Desconhecido';
+        }
+
+        // Função para exibir o resumo da compra
+        function exibirResumoCompra() {
+            const carrinho = localStorage.getItem('carrinho');
+            const resumoCompra = document.getElementById('carrinho-resumo');
+
+            if (carrinho) {
+                const carrinhoItens = JSON.parse(carrinho);
+
+                // Limpa o conteúdo atual do resumo
+                resumoCompra.innerHTML = '';
+
+                carrinhoItens.forEach(item => {
+                    const itemElement = document.createElement('div');
+                    itemElement.classList.add('item-resumo');
+                    itemElement.innerHTML = `
+                        <img src="${item.imagem}" alt="${item.nome}">
+                        <div>
+                            <p>Produto: ${item.nome}</p>
+                            <p>Preço: R$ ${item.preco.toFixed(2)}</p>
+                            <p>Gênero: ${item.genero}</p>
+                            <p>Tamanho: ${item.tamanho}</p>
+                        </div>`;
+                    resumoCompra.appendChild(itemElement);
+                });
+            }
+        }
+
+        // Função para finalizar a compra
+        function finalizarCompra() {
+            const user = JSON.parse(localStorage.getItem('userData'));
+
+            if (user && user.username) {
+                alert('Compra finalizada com sucesso!');
+                // Adicione aqui a lógica para redirecionar ou realizar outras ações após finalizar a compra.
+            } else {
+                alert('Você precisa estar logado para acessar ao pagamento!');
+                window.location.href = 'loginemaus.html';
+            }
+        }
+
+        // Função para copiar o link PIX
+        function copiarLinkPix() {
+            var copyText = document.getElementById("pix-link");
+            var textArea = document.createElement("textarea");
+            textArea.value = copyText.textContent;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+            alert("Link PIX copiado!");
+        }
+
+
+        function verificarCampos() {
+    var camposEndereco = document.querySelectorAll("#endereco input");
+
+    var todosPreenchidos = Array.from(camposEndereco).every(campo => campo.value.trim() !== "");
+
+    if (todosPreenchidos) {
+        // Ocultar mensagem de erro (caso esteja sendo exibida)
+        document.getElementById("mensagemErro").style.display = "none";
+
+        // Exibir mensagem de sucesso
+        document.getElementById("mensagemSucesso").style.display = "block";
+
+        // Redirecionar para a página comentarioemaus.html
+        window.location.href = "comentarioemaus.html";
+    } else {
+        // Ocultar mensagem de sucesso (caso esteja sendo exibida)
+        document.getElementById("mensagemSucesso").style.display = "none";
+
+        // Exibir mensagem de erro
+        document.getElementById("mensagemErro").style.display = "block";
+    }
+
+    // Remova a parte relacionada ao link PIX e à verificação de cartão de crédito
+}
+
+
+
+
+
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const opcaoPix = document.getElementById('opcaoPix');
+            const opcaoCartao = document.getElementById('opcaoCartao');
+            const pixSection = document.getElementById('pixSection');
+            const cartaoSection = document.getElementById('cartaoSection');
+
+            opcaoPix.addEventListener('change', function () {
+                if (opcaoPix.checked) {
+                    pixSection.style.display = 'block';
+                    cartaoSection.style.display = 'none';
+                }
+            });
+
+            opcaoCartao.addEventListener('change', function () {
+                if (opcaoCartao.checked) {
+                    pixSection.style.display = 'none';
+                    cartaoSection.style.display = 'block';
+                }
+            });
+        });
+
+        // Chamada inicial para exibir o resumo ao carregar a página
+        exibirResumoCompra();
+
+    </script>
+
+    </script>
+</body>
+
+</html>

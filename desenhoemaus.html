@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sua arte na emaus</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="img/icone.png">
+    <style>
+        .bemVindo {
+            width: 500px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+
+        }
+
+        canvas {
+            border: 2px solid rgb(255, 255, 255);
+            background-color: white;
+            cursor: crosshair;
+            margin-bottom: 50px;
+        }
+
+        html{
+            background-color: black;
+        }
+        
+        body {
+            text-align: center;
+            padding: 0px 50px;
+            background-color: black;
+        }
+
+        #cor {
+            width: 200px;
+            margin: 10px 35px;
+        }
+
+        #espessura {
+            width: 200px;
+            margin: 10px 35px;
+        }
+
+        #tipoPincel {
+            width: 100px;
+            height: 50px;
+            margin: 10px 35px;
+        }
+
+        section {
+            width: 300px;
+            background-color: transparent;
+        }
+
+        label {
+            color: white;
+        }
+
+        button {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            outline: none;
+            border: 0;
+            vertical-align: middle;
+            text-decoration: none;
+            font-family: inherit;
+            font-size: 15px;
+        }
+
+        button.learn-more {
+            font-weight: 600;
+            color: #382b22;
+            text-transform: uppercase;
+            padding: 1.25em 2em;
+            background: #fff0f0;
+            border: 2px solid #b18597;
+            border-radius: 0.75em;
+            -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+            -webkit-transition: background 150ms cubic-bezier(0, 0, 0.58, 1), -webkit-transform 150ms cubic-bezier(0, 0, 0.58, 1);
+            transition: transform 150ms cubic-bezier(0, 0, 0.58, 1), background 150ms cubic-bezier(0, 0, 0.58, 1), -webkit-transform 150ms cubic-bezier(0, 0, 0.58, 1);
+        }
+
+        button.learn-more::before {
+            position: absolute;
+            content: '';
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #f9c4d2;
+            border-radius: inherit;
+            -webkit-box-shadow: 0 0 0 2px #b18597, 0 0.625em 0 0 #ffe3e2;
+            box-shadow: 0 0 0 2px #b18597, 0 0.625em 0 0 #ffe3e2;
+            -webkit-transform: translate3d(0, 0.75em, -1em);
+            transform: translate3d(0, 0.75em, -1em);
+            transition: transform 150ms cubic-bezier(0, 0, 0.58, 1), box-shadow 150ms cubic-bezier(0, 0, 0.58, 1), -webkit-transform 150ms cubic-bezier(0, 0, 0.58, 1), -webkit-box-shadow 150ms cubic-bezier(0, 0, 0.58, 1);
+        }
+
+        button.learn-more:hover {
+            background: #ffe9e9;
+            -webkit-transform: translate(0, 0.25em);
+            transform: translate(0, 0.25em);
+        }
+
+        button.learn-more:hover::before {
+            -webkit-box-shadow: 0 0 0 2px #b18597, 0 0.5em 0 0 #ffe3e2;
+            box-shadow: 0 0 0 2px #b18597, 0 0.5em 0 0 #ffe3e2;
+            -webkit-transform: translate3d(0, 0.5em, -1em);
+            transform: translate3d(0, 0.5em, -1em);
+        }
+
+        button.learn-more:active {
+            background: #ffe9e9;
+            -webkit-transform: translate(0em, 0.75em);
+            transform: translate(0em, 0.75em);
+        }
+
+        button.learn-more:active::before {
+            -webkit-box-shadow: 0 0 0 2px #b18597, 0 0 #ffe3e2;
+            box-shadow: 0 0 0 2px #b18597, 0 0 #ffe3e2;
+            -webkit-transform: translate3d(0, 0, -1em);
+            transform: translate3d(0, 0, -1em);
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <img class="bemVindo" src="img/bemvindo.png" alt="">
+    <canvas id="canvas" width="1385" height="500"></canvas>
+    <label for="tipoPincel"></label>
+
+    <select id="tipoPincel">
+
+        <option id="lapis" value="lapis">Lápis</option>
+        <option value="borracha">Borracha</option>
+
+        <label for="espessura">Espessura do Pincel:</label>
+        <input type="range" id="espessura" min="1" max="10" step="1" value="1">
+        <input type="color" id="cor" value="#000000">
+
+
+        <a href="desenhoemaus.html"><button class="learn-more"> reinicie aqui </button></a>
+        <button class="learn-more" onclick="enviarArte()">Enviar Arte</button>
+        <a href="index.html"><button class="learn-more">Voltar</button></a>
+
+    </select>
+    <script>
+        //pega o ID canvas do HTML
+        let canvas = document.getElementById("canvas");
+
+        //pegamos o contexto do desenho, esse é o metodo que retorna o tipo da animação, usar o paramento "2d" significa que o objeto que será renderizado será bidimensional
+        let contexto = canvas.getContext("2d");
+
+        //variável que vai indentificar se estamos desenhando
+        let desenhando = false;
+
+        let tipoPincel = "lapis"; // Pincel padrão é o lápis
+
+        let tipoPincelSelect = document.getElementById("tipoPincel");
+
+        tipoPincelSelect.addEventListener("change", function () {
+            tipoPincel = tipoPincelSelect.value;
+        });
+
+        let espessuraInput = document.getElementById("espessura");
+
+        // Define a espessura inicial do pincel
+        contexto.lineWidth = espessuraInput.value;
+
+        // Adiciona um ouvinte de evento para o evento de alteração de espessura
+        espessuraInput.addEventListener("input", function () {
+            // Atualiza a espessura do pincel quando o usuário ajusta a barra deslizante
+            contexto.lineWidth = espessuraInput.value;
+        });
+
+        //pegamos o input da paleta de cor do HTML
+        let corInput = document.getElementById("cor");
+
+        // Define a cor inicial do contexto de desenho
+        contexto.strokeStyle = corInput.value;
+
+        // adiciona um ouvinte de evento para o evento de alteração de cor
+        corInput.addEventListener("change", function () {
+            // atualiza a cor do contexto de desenho quando o usuário escolhe uma nova cor
+            contexto.strokeStyle = corInput.value;
+        });
+
+
+        canvas.addEventListener("mousedown", function (event) {
+            //vamos usar o metodo addEventListner para ouvir nosso mouse, ele irá indentificar quando clicarmos
+            desenhando = true;
+            //desenhando se torna verdade
+            contexto.beginPath();
+            //a variavel contexto junto com o metodo beginPath() indica que algo novo será criado
+            contexto.moveTo(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop);
+            //nesse metodo, vamos dizer como o contexto irá funcionar, o clientX vai fornecer as cordenadas horizontais do mouse e o offsetLeft irá converter esse valor em pixel (px), a mesma coisa acontece com o clientY na vertical.
+        })
+
+        // canvas.addEventListener("mousemove", function(event){
+        //     //função que indentifica quando movemos o mouse
+        //     if (desenhando) {
+        //         //esse if vai indentificar se estamos clicando enquanto movemos o mouse
+        //         contexto.lineTo(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop);
+        //         //o lineTo vai juntar as codenadas e indentificar alinha que estamos traçando enquanto clicamos e movemos o mouse
+        //         contexto.stroke();
+        //     }
+        // })
+
+        canvas.addEventListener("mousemove", function (event) {
+            //função que identifica quando movemos o mouse
+            if (desenhando) {
+                // Verifica o tipo de pincel atual
+                if (tipoPincel === "lapis") {
+                    contexto.lineTo(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop);
+                    contexto.stroke();
+                } else if (tipoPincel === "borracha") {
+                    // Use o tipo de pincel borracha para apagar
+                    contexto.clearRect(event.clientX - canvas.offsetLeft - contexto.lineWidth / 2, event.clientY - canvas.offsetTop - contexto.lineWidth / 2, contexto.lineWidth, contexto.lineWidth);
+                }
+            }
+        });
+
+        canvas.addEventListener("mouseup", function (event) {
+            //essa função indentifica quando não estamos mais clicando no mouse
+            desenhando = false;
+        })
+
+        function enviarArte() {
+            // Exibe um alerta informando que a arte será revisada
+            alert("Sua arte será revisada. Verifique se o desenho será aprovado ou não via e-mail.");
+
+            // Pergunta ao usuário se deseja salvar o desenho
+            if (window.confirm("Deseja salvar o desenho na área de trabalho?")) {
+                // Limpa o desenho no canvas
+                let canvas = document.getElementById("canvas");
+                let contexto = canvas.getContext("2d");
+                contexto.clearRect(0, 0, canvas.width, canvas.height);
+
+                // Cria um link para download da imagem
+                let link = document.createElement('a');
+                link.href = canvas.toDataURL("image/png");
+                link.download = 'minha_arte.png';
+
+                // Adiciona o link ao documento e simula um clique para iniciar o download
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            } else {
+                // Reinicia a página
+                location.reload();
+            }
+        }
+
+    </script>
+</body>
+
+</html>

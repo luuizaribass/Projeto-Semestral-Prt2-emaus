@@ -1,0 +1,355 @@
+@media only screen and (max-width: 1200px) {
+
+    /* começo da paleta de cor */
+
+    :root {
+        --color-neutral-00: #31201E;
+        --color-neutral-0: #31201E;
+        --color-neutral-10: #171717;
+        --color-neutral-20: #000000;
+        --color-neutral-30: #ffffff;
+        --color-neutral-40: #f5f5f5;
+        --color-neutral-50: #E8E8E8;
+        --color-neutral-60: #a8a29e;
+        --color-neutral-70: #fff7f4;
+        --color-neutral-80: #fff2f0;
+        --color-neutral-90: #F1E3E1;
+        --color-neutral-100: #f0d9d6;
+        --color-neutral-110: #E0C7BD;
+        --color-neutral-120: #BF8B86;
+        --color-neutral-130: #DC9F8D;
+        --color-neutral-140: #A07573;
+        --color-neutral-150: #A66454;
+        --color-neutral-160: #A66454;
+    }
+
+    /* fim da paleta de cor */
+
+    /* começo menu responsivo */
+
+    #conteudo {
+        padding: 0px;
+    }
+
+    
+
+    span#burguer {
+        background-color: var(--color-neutral-110);
+        color: var(--color-neutral-20);
+        display: block;
+        text-align: center;
+        padding: 10px;
+        cursor: pointer;
+    }
+
+    span#burguer:hover {
+        background-color: var(--color-neutral-110);
+        color: var(--color-neutral-40);
+    }
+
+    menu {
+        display: none;
+    }
+
+    header, ul {
+        flex-direction: column;
+    }
+
+    header {
+        align-items: flex-start;
+    }
+
+    header > ul {
+        text-align: center;
+    }
+
+    #menu-geral {
+        display: block;
+        align-items: center;
+    }
+
+    .container{
+        display: none;
+    }
+
+    menu>ul {
+        width: 100%;
+        display: block;
+        text-decoration: none;
+        text-align: center;
+        color: var(--color-neutral-20);
+        background-color: var(--color-neutral-30);
+    }
+
+    .modo-noturno menu>ul {
+        background-color: var(--color-neutral-10);
+    }
+
+    #espaço, #iconespaço {
+        border-bottom: 1.5px solid var(--color-neutral-120);
+    }
+
+    #espaço, #iconespaço{
+        padding: 8px 0px;
+    }
+    
+    #contagem {
+        /* #cart-count { */
+        position: absolute;
+        top: 4px;
+        right: -10px;
+        background-color: var(--color-neutral-120);
+        color: white;
+        border-radius: 50%;
+        padding: 1px 5.5px;
+        font-size: 8px;
+    }
+
+    .barraPesquisar {
+        display: none;
+    }
+
+    #itensMenu{
+        display: flex;
+        flex-direction: column-reverse;
+    }
+
+    #menu-geral #logo-img {
+        width: 85px;
+        margin-left: 0px;
+    }
+
+    /* 
+    #itens-menu ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    header>a {
+        margin: 0px;
+        padding: 0px;
+    }
+
+    menu>ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    menu>ul>li>a {
+        width: 100%;
+        display: block;
+        padding: 10px;
+        text-decoration: none;
+        text-align: center;
+        color: var(--color-neutral-20);
+        background-color: var(--color-neutral-70);
+        border-top: 2px solid var(--color-neutral-90);
+    }
+
+    menu>ul>li>a>img {
+        width: 15px;
+    }
+
+
+    menu {
+        display: block;
+        padding: 10px;
+        text-decoration: none;
+        text-align: center;
+        color: var(--color-neutral-20);
+        background-color: var(--color-neutral-70);
+        border-top: 2px solid var(--color-neutral-90);
+    }
+
+    span#burguer {
+        background-color: var(--color-neutral-110);
+        color: var(--color-neutral-20);
+        display: block;
+        text-align: center;
+        padding: 10px;
+        cursor: pointer;
+    }
+
+    span#burguer:hover {
+        background-color: var(--color-neutral-110);
+        color: var(--color-neutral-40);
+    } */
+
+     /* fim menu responsivo */
+
+     .sticker{
+        width: 70%;
+     }
+
+     .fffff {
+        display: flex;
+        /* height: 440px; */
+        padding-top: 20px;
+        justify-content: center;
+        align-items: center;
+        /* margin-bottom: 30px; */
+    }
+
+    /* From uiverse.io by @satyamchaudharydev */
+/* this button is inspired by -- whatsapp input */
+/* == type to see fully interactive and click the close buttom to remove the text  == */
+
+.form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    --input-bg: #FFf;
+   /*  background of input */
+    --padding: 1.5em;
+    --rotate: 80deg;
+   /*  rotation degree of input*/
+    --gap: 2em;
+    /*  gap of items in input */
+    --icon-change-color: #15A986;
+   /*  when rotating changed icon color */
+    --height: 40px;
+   /*  height */
+    width: 400px;
+    padding-inline-end: 1em;
+   /*  change this for padding in the end of input */
+    background: var(--input-bg);
+    position: relative;
+    border-radius: 4px;
+    margin-top: 80px;
+    
+  }
+  
+  .form label {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: var(--height);
+  }
+  
+  .form input {
+    width: 100%;
+    padding-inline-start: calc(var(--padding) + var(--gap));
+    outline: none;
+    background: none;
+    border: 0;
+  }
+  /* style for both icons -- search,close */
+  .form svg {
+    /* display: block; */
+    color: #111;
+    transition: 0.3s cubic-bezier(.4,0,.2,1);
+    position: absolute;
+    height: 15px;
+  }
+  /* search icon */
+  .icon {
+    position: absolute;
+    left: var(--padding);
+    transition: 0.3s cubic-bezier(.4,0,.2,1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  /* arrow-icon*/
+  .swap-off {
+    transform: rotate(-80deg);
+    opacity: 0;
+    visibility: hidden;
+  }
+  /* close button */
+  .close-btn {
+    /* removing default bg of button */
+    background: none;
+    border: none;
+    right: calc(var(--padding) - var(--gap));
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #111;
+    padding: 0.1em;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    transition: 0.3s;
+    opacity: 0;
+    transform: scale(0);
+    visibility: hidden;
+  }
+  
+  .form input:focus ~ .icon {
+    transform: rotate(var(--rotate)) scale(1.3);
+  }
+  
+  .form input:focus ~ .icon .swap-off {
+    opacity: 1;
+    transform: rotate(-80deg);
+    visibility: visible;
+    color: var(--icon-change-color);
+  }
+  
+  .form input:focus ~ .icon .swap-on {
+    opacity: 0;
+    visibility: visible;
+  }
+  
+  .form input:valid ~ .icon {
+    transform: scale(1.3) rotate(var(--rotate))
+  }
+  
+  .form input:valid ~ .icon .swap-off {
+    opacity: 1;
+    visibility: visible;
+    color: var(--icon-change-color);
+  }
+  
+  .form input:valid ~ .icon .swap-on {
+    opacity: 0;
+    visibility: visible;
+  }
+  
+  .form input:valid ~ .close-btn {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+    transition: 0s;
+  }
+  
+  
+
+
+}
+
+@media only screen and (max-width: 900px) { 
+    
+    .container-carrossel {
+        width: 100%;
+        height: 290px;
+        position: relative;
+        overflow: hidden;
+        border-radius: 10px;
+    }
+}
+
+@media only screen and (max-width: 700px) { 
+    
+    .container-carrossel {
+        width: 100%;
+        height: 200px;
+        position: relative;
+        overflow: hidden;
+        border-radius: 10px;
+    }
+}
+
+@media only screen and (max-width: 500px) { 
+    
+    .container-carrossel {
+        width: 100%;
+        height: 150px;
+        position: relative;
+        overflow: hidden;
+        border-radius: 10px;
+    }
+}

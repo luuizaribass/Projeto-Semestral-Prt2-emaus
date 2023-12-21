@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link class="icone" rel="icon" href="img/icone.png">
+    <link rel="stylesheet" href="style.css">
+
+    <title>código emaús</title>
+</head>
+<body>
+    <main id="container_login">
+        <form id="login_form">
+            <div id="form_header">
+                <a><h1>emaús</h1></a>
+                <i id="mode_icon" class="fa-solid fa-moon"></i>
+            </div>
+
+                <div class="input-box">
+                    <label for="recovery_code">
+                        Insira o código de recuperação que você recebeu por e-mail
+                        <div class="input-field">
+                            <i class="fa-solid fa-lock"></i>
+                            <input type="text" id="recovery_code" name="recovery_code" required>
+                        </div>
+                    </label>
+                
+
+                <div id="forgot_password">
+                    <a href="loginemaus.html">Voltar para login</a>
+                </div>
+                <div id="forgot_password">
+                    <a href="index.html">Cancelar</a>
+                </div>
+            </div>
+            
+
+            <button type="submit" id="login_button">
+                Verificar Código
+            </button>
+        </form>
+    </main>
+
+    <script>
+        const mode = document.getElementById('mode_icon');
+        const form = document.getElementById('code_form');
+
+        mode.addEventListener('click', () => {
+            if (mode.classList.contains('fa-moon')) {
+                mode.classList.remove('fa-moon');
+                mode.classList.add('fa-sun');
+                form.classList.add('dark');
+            } else {
+                mode.classList.add('fa-moon');
+                mode.classList.remove('fa-sun');
+                form.classList.remove('dark');
+            }
+        });
+
+        form.addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    const enteredCode = document.getElementById('recovery_code').value;
+
+    // Obter o código armazenado em sessionStorage
+    const expectedCode = sessionStorage.getItem('recoveryCode');
+
+    if (enteredCode && expectedCode && enteredCode.trim() === expectedCode.trim()) {
+        alert('Código verificado com sucesso! Redirecionando para redefinição de senha');
+        // Remover o código de sessionStorage após o uso
+        sessionStorage.removeItem('recoveryCode');
+        // Redirect the user to the login page
+        window.location.href = 'meuloginemaus.html';
+    } else {
+        alert('Código inválido. Tente novamente.');
+    }
+});
+
+
+
+    </script>
+</body>
+</html>

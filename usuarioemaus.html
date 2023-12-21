@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link class="icone" rel="icon" href="img/icone.png">
+    <link rel="stylesheet" href="style.css">
+
+    <title>perfil emaus</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+        /* começo da paleta de cor */
+
+        :root {
+            --color-neutral-00: #31201E;
+            --color-neutral-0: #31201E;
+            --color-neutral-10: #171717;
+            --color-neutral-20: #000000;
+            --color-neutral-30: #ffffff;
+            --color-neutral-40: #f5f5f5;
+            --color-neutral-50: #E8E8E8;
+            --color-neutral-60: #a8a29e;
+            --color-neutral-70: #fff7f4;
+            --color-neutral-80: #fff2f0;
+            --color-neutral-90: #F1E3E1;
+            --color-neutral-100: #f0d9d6;
+            --color-neutral-110: #E0C7BD;
+            --color-neutral-120: #BF8B86;
+            --color-neutral-130: #DC9F8D;
+            --color-neutral-140: #A07573;
+            --color-neutral-150: #A66454;
+            --color-neutral-160: #888888;
+        }
+
+        /* fim da paleta de cor */
+
+        a {
+            text-decoration: none;
+            color: var(--color-neutral-20);
+        }
+
+        a:hover {
+            color: var(--color-neutral-160);
+        }
+
+        a:hover .emaus {
+            width: 70px;
+
+        }
+
+
+        .emaus {
+            background: var(--color-neutral-120);
+            height: 2px;
+            width: 35px;
+            transition: 0.3s ease-in-out;
+        }
+
+        #login_form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0px;
+        }
+
+        #perfil_header {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #perfil_content {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        #profile_picture {
+            position: relative;
+            margin-bottom: 10px;
+            /* Adicionado espaço entre a imagem e os botões */
+        }
+
+
+        h8 {
+            font: 700 20px 'Poppins', sans-serif;
+
+        }
+
+        #profile_info {
+            padding: 25px 0px;
+        }
+
+
+
+        #profile_picture img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        #file_input {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        #trocaFoto,
+        #removeImg,
+        #trocaNome,
+        #sairLogin,
+        #logout {
+            background-color: var(--color-neutral-120);
+            color: white;
+            padding: 5px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        #trocaFoto:hover,
+        #removeImg:hover,
+        #trocaNome:hover,
+        #sairLogin:hover,
+        #logout:hover {
+            background-color: var(--color-neutral-160);
+        }
+
+        button {
+            width: 180px;
+        }
+
+        /* Dark mode */
+        .dark {
+            background-color: #333;
+            color: #fff;
+        }
+
+        .dark #container_login {
+            background-color: #444;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+
+<body>
+    <main id="container_login">
+        <main id="login_form">
+            <div id="perfil_header">
+
+                <div id="emaus">
+                    <a href="index.html">
+                        <h8>Emaús</h8>
+                    </a>
+                </div>
+
+                <i id="mode_icon" class="fa-solid fa-moon"></i>
+            </div>
+
+            <div id="perfil_content">
+                <div id="profile_picture">
+                    <!-- <img id="profile_image" src="img/usuario.png" alt="Foto de Perfil"> -->
+                    <img id="profile_image" src="img/usuario.png" alt="Foto de Perfil">
+                    <input type="file" id="file_input">
+                </div>
+
+                <button id="trocaFoto" onclick="selectNewImage()">Trocar Foto</button>
+                <button id="removeImg" onclick="removeImage()">Remover Foto</button>
+
+                <div id="profile_info">
+                    <h2 id="username_display">Nome do Usuário</h2>
+                    <p id="email_display">Email: user@example.com</p>
+                    <p>Senha: ********</p>
+                    <div id="forgot_password">
+                        <a href="recuperar_senha.html">Esqueceu a senha?</a>
+                    </div>
+                    <p>Última Atualização: 01/12/2023</p>
+                </div>
+            </div>
+
+            <button id="trocaNome" onclick="changeUsername()">Trocar Nome</button>
+            <!-- <button id="logout" onclick="sair()">Sair do Login</button> -->
+            <button id="sairLogin" onclick="logout()">Apagar Conta</button>
+
+        </main>
+    </main>
+
+    <script src="salvaImg.js"></script>
+    <script src="usuario.js"></script>
+    <script>
+
+
+
+        //começo noturno
+        const mode = document.getElementById('mode_icon');
+        // const logoImg = document.getElementById('profile_image');
+        const perfilHeaer = document.getElementById('emaus')
+
+        mode.addEventListener('click', () => {
+            const form = document.getElementById('login_form');
+            if (mode.classList.contains('fa-moon')) {
+                mode.classList.remove('fa-moon');
+                mode.classList.add('fa-sun');
+                perfilHeaer.classList.add('modo-noturno')
+                // logoImg.src = 'img/usuariowhite.png';
+                form.classList.add('dark')
+
+            } else {
+                mode.classList.add('fa-moon');
+                mode.classList.remove('fa-sun');
+                perfilHeaer.classList.remove('modo-noturno')
+                // logoImg.src = 'img/usuario.png';
+                form.classList.remove('dark')
+            }
+        });
+
+        //fim noturno
+
+
+        //troca cor sol e lua 
+
+        const mode_icon = document.getElementById('mode_icon');
+        const moon_icon = document.getElementById('moon_icon');
+
+        mode_icon.addEventListener('mouseover', () => {
+            mode_icon.style.color = '#BF8B86';
+        });
+
+        mode_icon.addEventListener('mouseout', () => {
+            if (!mode.classList.contains('fa-sun')) {
+                mode_icon.style.color = '#000000';
+            }
+        });
+
+        moon_icon.addEventListener('mouseover', () => {
+            moon_icon.style.color = '#BF8B86';
+        });
+
+        moon_icon.addEventListener('mouseout', () => {
+            moon_icon.style.color = '#000000';
+        });
+
+        //fim modo noturno
+
+        // function toggleDarkMode() {
+        //     const form = document.getElementById('login_form');
+        //     if (mode.classList.contains('fa-moon')) {
+        //         mode.classList.remove('fa-moon');
+        //         mode.classList.add('fa-sun');
+        //         form.classList.add('dark');
+
+        //         // Mudar a imagem de perfil para usuariowhite.png no modo noturno
+        //         if (!userData.profileImage) {
+        //             document.getElementById('profile_image').src = 'caminho/para/usuariowhite.png';
+        //         }
+
+        //         return;
+        //     }
+
+        //     mode.classList.add('fa-moon');
+        //     mode.classList.remove('fa-sun');
+        //     form.classList.remove('dark');
+
+        //     // Restaurar a imagem de perfil original ao sair do modo noturno
+        //     if (!userData.profileImage) {
+        //         document.getElementById('profile_image').src = 'caminho/para/usuario.png';
+        //     }
+        // }
+
+
+        //         function loadImage() {
+        //     const fileInput = document.getElementById('file_input');
+        //     const profileImage = document.getElementById('profile_image');
+
+        //     // Verificar se já existe uma imagem salva no localStorage
+        //     const savedImageData = localStorage.getItem('userData');
+        //     if (savedImageData) {
+        //         const savedData = JSON.parse(savedImageData);
+        //         if (savedData.profileImage) {
+        //             profileImage.src = savedData.profileImage;
+        //         }
+        //     }
+
+        //     const file = fileInput.files[0];
+
+        //     if (file) {
+        //         const reader = new FileReader();
+
+        //         reader.onload = function (e) {
+        //             profileImage.src = e.target.result;
+        //             // Salvar o caminho da imagem no localStorage
+        //             localStorage.setItem('userData', JSON.stringify({
+        //                 ...JSON.parse(localStorage.getItem('userData')),
+        //                 profileImage: e.target.result
+        //             }));
+        //         };
+
+        //         reader.readAsDataURL(file);
+        //     }
+        // }
+
+        // function loadImage() {
+        //     const fileInput = document.getElementById('file_input');
+        //     const profileImage = document.getElementById('profile_image');
+
+        //     fileInput.addEventListener('change', function () {
+        //         const file = this.files[0];
+        //         const reader = new FileReader();
+
+        //         reader.onload = function (e) {
+        //             profileImage.src = e.target.result;
+        //             // Salvar o caminho da imagem no localStorage
+        //             localStorage.setItem('profileImage', e.target.result);
+        //         }
+
+        //         reader.readAsDataURL(file);
+        //     });
+
+        //     // Verificar se já existe uma imagem salva no localStorage ao recarregar a página
+        //     const savedImageData = localStorage.getItem('profileImage');
+        //     if (savedImageData) {
+        //         profileImage.src = savedImageData;
+        //     }
+        // }
+
+        // // Chamar a função loadImage() para que a imagem seja carregada ao recarregar a página
+        // loadImage();
+
+
+        // const inputImagem = document.getElementById('file_input')
+        // const salvaImg = document.getElementById('profile_image')
+
+        // inputImagem.addEventListener('change' , function(){
+        //     const file = inputImagem.files[0];
+        //     const reader = new FileReader();
+        
+        //     reader.onload = function(e) {
+        //         const imgBase = e.target.result;
+        //         localStorage.setItem('imagem', imgBase);
+        //         salvaImg.src = imgBase
+        //     }
+
+        //     reader.readAsDataURL(file);
+        // })
+
+        // window.addEventListener('load', function(){
+        //     const imgSalva = localStorage.getItem('imagem');
+        //     if (imgSalva) {
+        //         salvaImg.src = imgSalva;
+        //     }
+        // })
+
+
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const userData = JSON.parse(localStorage.getItem("userData"));
+
+            if (userData) {
+                document.getElementById("username_display").innerText = userData.username;
+                document.getElementById("email_display").innerText = userData.email;
+                document.getElementById("password_display").innerText = userData.password;
+
+                // const imgSalva = localStorage.getItem("imagem");
+                // if (imgSalva) {
+                //     document.getElementById('profile_image').src = imgSalva;
+                // }
+            }
+        });
+
+
+
+
+        // function selectNewImage() {
+        //     // Limpar o input de arquivo antes de abrir
+        //     document.getElementById('file_input').value = '';
+        //     // Acionar o clique no input de arquivo
+        //     document.getElementById('file_input').click();
+        // }
+
+        // loadImage();
+
+
+
+
+        // function loadImage(e) {
+        //     const profileImage = document.getElementById('profile_image');
+        //     profileImage.src = e.target.result;
+
+        //     // Armazenar a foto carregada no localStorage
+        //     localStorage.setItem('profileImage', e.target.result);
+        // }
+
+        // function selectNewImage() {
+        //     document.getElementById('file_input').click();
+        // }
+
+        // // Verificar se há uma imagem de perfil armazenada no localStorage e definir o atributo 'src' da imagem
+        // window.addEventListener('DOMContentLoaded', () => {
+        //     const profileImage = document.getElementById('profile_image');
+        //     const storedImage = localStorage.getItem('profileImage');
+        //     if (storedImage) {
+        //         profileImage.src = storedImage;
+        //     }
+        // });
+
+
+
+
+
+
+
+        // Adicionar aqui a lógica para trocar o nome de usuário a cada 14 dias
+        function changeUsername() {
+            const newName = prompt('Digite o novo nome de usuário:');
+            if (newName) {
+                document.getElementById('username_display').innerText = newName;
+                // Atualizar o nome de usuário no localStorage
+                userData.username = newName;
+                localStorage.setItem('userData', JSON.stringify(userData));
+            }
+        }
+
+
+
+        function changePassword() {
+            const newPassword = prompt('Digite a nova senha:');
+
+            // Validar a nova senha conforme necessário
+
+            // Atualizar a senha no localStorage
+            userData.password = newPassword;
+
+            // Atualizar a data da última troca de senha
+            userData.lastPasswordChange = new Date().toISOString();
+
+            // Salvar as alterações no localStorage
+            localStorage.setItem('userData', JSON.stringify(userData));
+
+            alert('Senha trocada com sucesso!');
+        }
+
+        function removeImage() {
+            const confirmRemove = confirm('Tem certeza de que deseja remover a foto de perfil?');
+
+            if (confirmRemove) {
+                // Remover a imagem de perfil
+                document.getElementById('profile_image').src = 'img/usuario.png';
+                // Remover o caminho da imagem no localStorage
+                const userDataString = localStorage.getItem('userData');
+                const userData = JSON.parse(userDataString);
+                userData.profileImage = '';
+                localStorage.setItem('userData', JSON.stringify(userData));
+            }
+        }
+
+
+        //começo sair do login
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const userData = JSON.parse(localStorage.getItem("userData"));
+
+            if (userData) {
+                document.getElementById("username_display").innerText = userData.username;
+                document.getElementById("email_display").innerText = userData.email;
+                document.getElementById("password_display").innerText = userData.password;
+            }
+        });
+
+        // Função para realizar o logout
+        function logout() {
+            // Limpar os dados de autenticação do localStorage
+            localStorage.removeItem('userData');
+
+            // Exibir a mensagem de alerta
+            alert('Você saiu da sua conta. Por favor, faça login novamente.');
+
+            // Redirecionar para a página de login
+            window.location.href = 'loginemaus.html';
+        }
+
+        // Verificar se há dados do usuário no localStorage
+        if (!userData) {
+            // Se não houver dados do usuário, redirecionar de volta para a página de login
+            alert('Você não está autorizado. Faça login novamente.');
+            window.location.href = 'loginemaus.html';
+        }
+
+
+        function sair() {
+            window.location.href = 'loginemaus.html';
+        }
+
+
+        //fim sair do login
+
+    </script>
+</body>
+
+</html>
